@@ -18,7 +18,7 @@
     "url": "https://github.com/kazvizian/clibu-js/issues"
   },
   "scripts": {
-    "build": "packlet build --sourcemap none",
+    "build": "packlet-build",
     "clean": "rm -rf dist .tsbuildinfo",
     "test": "bun test"
   },
