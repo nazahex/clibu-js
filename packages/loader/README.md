@@ -15,22 +15,35 @@
 
 </div>
 
-Configuration loader for Clibu. Discovers `clibu.config.*` with first‑match resolution and lightweight TypeScript transpile + cache.
+Configuration loader for Clibu. Discovers configuration from explicit `package.json` opt‑in (`clibu.configFile`) or filename-based `clibu.config.*` files with first‑match resolution and lightweight TypeScript transpile + cache.
 
 ## Features
 
-- Searches the project root for the first existing config in this order:
-  1. `clibu.config.ts`
-  2. `clibu.config.mts`
-  3. `clibu.config.cts`
-  4. `clibu.config.mjs`
-  5. `clibu.config.js`
-  6. `clibu.config.cjs`
-  7. `clibu.config.json`
+1. Explicit opt‑in (preferred): specify a config file (or directory) via `package.json`:
 
-- For TypeScript files, transpiles on the fly and caches the output in `.clibu/cache/` using a SHA‑1 of the source contents.
-  - `.ts` / `.mts` → ESM (`.mjs`)
-  - `.cts` → CJS (`.cjs`)
+```jsonc
+{
+  "clibu": {
+    "configFile": "./src/index.ts" // or ./clibu-config.ts, or a directory
+  }
+}
+```
+
+- If `configFile` points to a directory, loader attempts `index.ts`, `index.mts`, `index.cts`, `index.mjs`, `index.js`, `index.cjs`, `index.json` inside it.
+- This is prioritized before filename discovery.
+
+2. Filename discovery (first match wins):
+   1. `clibu.config.ts`
+   2. `clibu.config.mts`
+   3. `clibu.config.cts`
+   4. `clibu.config.mjs`
+   5. `clibu.config.js`
+   6. `clibu.config.cjs`
+   7. `clibu.config.json`
+
+3. TypeScript files are transpiled on the fly and cached in `.clibu/cache/` using a SHA‑1 of contents.
+   - `.ts` / `.mts` → ESM (`.mjs`)
+   - `.cts` → CJS (`.cjs`)
 
 ## Basic usage
 
@@ -74,6 +87,8 @@ export default {
 
 ## Notes
 
+- Opt‑in path (`clibu.configFile`) is safest for packages whose entry file has side‑effects: point directly to a pure config module.
+- Directory form lets you structure config in `src/` without adding a new top‑level file.
 - Cache invalidation is content‑based; modifying the source regenerates the cache file.
 - Loader concerns only discovery + loading; parsing/validation/runtime live in `@clibu/core`.
 
