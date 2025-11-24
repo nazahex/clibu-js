@@ -4,7 +4,7 @@
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Bun](https://img.shields.io/badge/Bun-%23000000.svg?logo=bun&logoColor=white)](https://bun.sh)<br />
-![license](https://img.shields.io/github/license/kazvizian/clibu-js)
+![license](https://img.shields.io/github/license/nazahex/clibu-js)
 
 </div>
 

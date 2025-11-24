@@ -6,7 +6,7 @@
 [![Bun](https://img.shields.io/badge/Bun-%23000000.svg?logo=bun&logoColor=white)](https://bun.sh)<br />
 ![Conventional Commits](https://img.shields.io/badge/commit-conventional-blue.svg)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-![license](https://img.shields.io/github/license/kazvizian/clibu-js)<br />
+![license](https://img.shields.io/github/license/nazahex/clibu-js)<br />
 [![Turborepo](https://img.shields.io/badge/-Turborepo-EF4444?logo=turborepo&logoColor=white)](https://turbo.build)
 [![Changesets](https://img.shields.io/badge/Changesets-🦋-white)](./CHANGELOG.md)
 [![Biome Linter & Formatted](https://img.shields.io/badge/Biome-60a5fa?style=flat&logo=biome&logoColor=white)](https://biomejs.dev/)

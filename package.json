@@ -2,7 +2,7 @@
   "name": "root",
   "version": "0.0.0",
   "description": "A KazVizian CLI Builder.",
-  "homepage": "https://github.com/kazvizian/clibu-js",
+  "homepage": "https://github.com/nazahex/clibu-js",
   "license": "MIT",
   "private": true,
   "author": {
@@ -12,10 +12,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kazvizian/clibu-js.git"
+    "url": "git+https://github.com/nazahex/clibu-js.git"
   },
   "bugs": {
-    "url": "https://github.com/kazvizian/clibu-js/issues"
+    "url": "https://github.com/nazahex/clibu-js/issues"
   },
   "scripts": {
     "build": "turbo run build",
