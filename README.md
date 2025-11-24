@@ -24,10 +24,10 @@ Clibu is a small TypeScript-first CLI builder split across focused packages so t
 
 ## Quick start
 
-1. Create a configuration file at your project root. For best IDE experience prefer TypeScript and `defineConfig`:
+1. Create a configuration file at your project root OR opt-in via `package.json` (if you want to reuse an existing module or directory). For best IDE experience prefer TypeScript and `defineConfig`:
 
 ```ts
-// clibu.config.ts
+// clibu.config.ts  (filename discovery)
 import { defineConfig } from "clibu"
 
 export default defineConfig({
@@ -46,6 +46,19 @@ export default defineConfig({
   }
 })
 ```
+
+Alternatively, point Clibu at a config module or directory via `package.json` (takes priority over filename discovery):
+
+```jsonc
+{
+  "clibu": {
+    "configFile": "./src" // directory: attempts index.ts/mts/cts/mjs/js/cjs/json
+    // or: "./src/cli-config.ts" (explicit file)
+  }
+}
+```
+
+If `configFile` is a directory, Clibu resolves the first existing `index.*` in the order: `index.ts`, `index.mts`, `index.cts`, `index.mjs`, `index.js`, `index.cjs`, `index.json`.
 
 Notes:
 

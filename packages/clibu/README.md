@@ -24,7 +24,6 @@ Clibu emphasizes reliability without sacrificing approachability, making it suit
 
 ## Features
 
-- Single-file declarative configuration: `clibu.config.ts` / `.mts` / `.cts` / `.mjs` / `.js` / `.cjs` / `.json`
 - TypeScript-first configuration and handler context
 - Rich option kinds: `flag`, `string`, `number`, `enum` with validation (min/max, pattern, choices)
 - Global options with inheritance and controlled overrides
@@ -48,10 +47,10 @@ yarn add clibu
 
 ## Quick start — CLI
 
-Create `clibu.config.ts` at your project root (with type-safety via `defineConfig`):
+Create `clibu.config.ts` at your project root or point `package.json.clibu.configFile` at a module/directory (recommended for reuse):
 
 ```ts
-// clibu.config.ts
+// clibu.config.ts (filename discovery)
 import { defineConfig } from "clibu"
 
 export default defineConfig({
@@ -78,17 +77,29 @@ clibu hello --help
 
 TypeScript configs are transpiled on demand and cached under `.clibu/cache/` using a content hash.
 
-Type-safety tips
+Opt-in alternative via package.json:
 
-- Prefer `defineConfig({...})` for rich IntelliSense and immediate type errors in your editor.
-- On TS 4.9+, you can also use the satisfies operator:
+```jsonc
+{
+  "clibu": { "configFile": "./src" }
+}
+```
 
-  ```ts
-  import type { CLIConfig } from "clibu"
-  export default {
-    /* ... */
-  } satisfies CLIConfig
-  ```
+If `configFile` points to a directory, Clibu tries `index.ts|mts|cts|mjs|js|cjs|json` before falling back to filename discovery.
+
+> [!NOTE]
+>
+> Type-safety tips:
+>
+> - Prefer `defineConfig({...})` for rich IntelliSense and immediate type errors in your editor.
+> - On TS 4.9+, you can also use the satisfies operator:
+>
+>   ```ts
+>   import type { CLIConfig } from "clibu"
+>   export default {
+>     /* ... */
+>   } satisfies CLIConfig
+>   ```
 
 ## Why Clibu (expanded)
 
@@ -183,7 +194,6 @@ Manual composition:
 import { createCLI, loadConfig } from "clibu"
 
 const cfg = await loadConfig(process.cwd())
-if (!cfg) throw new Error("No clibu.config.* found")
 
 const cli = createCLI(cfg)
 await cli.run(["build"])
@@ -204,6 +214,7 @@ TypeScript types (`CLIConfig`, `CLIContext`, etc.) are exported for convenience.
 
 Configuration is resolved using the following priority:
 
+0. Explicit opt-in: `package.json.clibu.configFile` (file or directory; directory resolves `index.ts|mts|cts|mjs|js|cjs|json`).
 1. TypeScript: `clibu.config.ts`, `.mts`, `.cts`
 2. JavaScript: `clibu.config.mjs`, `.js`, `.cjs`
 3. JSON: `clibu.config.json`
@@ -326,7 +337,7 @@ Clibu surfaces domain-specific errors with stable codes:
 ## FAQ & troubleshooting
 
 - **“No configuration file found.”**
-  Ensure a valid `clibu.config.*` exists at the project root; TypeScript files are auto-transpiled.
+  Ensure a valid `clibu.config.*` exists OR set `package.json.clibu.configFile` pointing to a module/directory (directory resolves index.\*). TypeScript files are auto-transpiled.
 
 - **“Command has no run() handler.”**
   Provide a `run(ctx)` function or execute a subcommand that defines one.
