@@ -6,7 +6,7 @@
   "bin": {
     "clibu": "./dist/index.mjs"
   },
-  "homepage": "https://github.com/kazvizian/clibu-js",
+  "homepage": "https://github.com/nazahex/clibu-js",
   "author": {
     "name": "KazViz",
     "email": "kaz@kazviz.com",
@@ -14,11 +14,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kazvizian/clibu-js.git",
+    "url": "git+https://github.com/nazahex/clibu-js.git",
     "directory": "packages/clibu"
   },
   "bugs": {
-    "url": "https://github.com/kazvizian/clibu-js/issues"
+    "url": "https://github.com/nazahex/clibu-js/issues"
   },
   "scripts": {
     "build": "packlet-build --external-auto --exec-js",
@@ -27,7 +27,7 @@
   },
   "keywords": [
     "kazviz",
-    "kazvizian",
+    "nazahex",
     "clibu",
     "cli",
     "builder"
